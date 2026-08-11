@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <!-- saved from url=(0039)https://kaizenn244.github.io/VitalFlow/ -->
 <html lang="en" data-darkreader-mode="dynamic" data-darkreader-scheme="dark" data-darkreader-proxy-injected="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style class="darkreader darkreader--fallback" media="screen"></style><style class="darkreader darkreader--user-agent" media="screen">@layer {
@@ -46,65 +47,6 @@ select:-webkit-autofill {
 }
 }</style><style class="darkreader darkreader--text" media="screen"></style><style class="darkreader darkreader--invert" media="screen">.jfk-bubble.gtx-bubble, .captcheck_answer_label > input + img, span#closed_text > img[src^="https://www.gstatic.com/images/branding/googlelogo"], span[data-href^="https://www.hcaptcha.com/"] > #icon, img.Wirisformula, a[data-testid="headerMediumLogo"]>svg, .d2l-navigation-link-image-container, .d2l-iframe-loading-container, div.mc-ip-hide[style*="background: rgb(255, 255, 255) !important"], [style*="color: rgb(0, 0, 1) !important;"] {
     filter: invert(100%) hue-rotate(180deg) contrast(90%) !important;
-}</style><style class="darkreader darkreader--inline" media="screen">[data-darkreader-inline-bgcolor] {
-  background-color: var(--darkreader-inline-bgcolor) !important;
-}
-[data-darkreader-inline-bgimage] {
-  background-image: var(--darkreader-inline-bgimage) !important;
-}
-[data-darkreader-inline-border] {
-  border-color: var(--darkreader-inline-border) !important;
-}
-[data-darkreader-inline-border-bottom] {
-  border-bottom-color: var(--darkreader-inline-border-bottom) !important;
-}
-[data-darkreader-inline-border-left] {
-  border-left-color: var(--darkreader-inline-border-left) !important;
-}
-[data-darkreader-inline-border-right] {
-  border-right-color: var(--darkreader-inline-border-right) !important;
-}
-[data-darkreader-inline-border-top] {
-  border-top-color: var(--darkreader-inline-border-top) !important;
-}
-[data-darkreader-inline-boxshadow] {
-  box-shadow: var(--darkreader-inline-boxshadow) !important;
-}
-[data-darkreader-inline-color] {
-  color: var(--darkreader-inline-color) !important;
-}
-[data-darkreader-inline-fill] {
-  fill: var(--darkreader-inline-fill) !important;
-}
-[data-darkreader-inline-stroke] {
-  stroke: var(--darkreader-inline-stroke) !important;
-}
-[data-darkreader-inline-outline] {
-  outline-color: var(--darkreader-inline-outline) !important;
-}
-[data-darkreader-inline-stopcolor] {
-  stop-color: var(--darkreader-inline-stopcolor) !important;
-}
-[data-darkreader-inline-bg] {
-  background: var(--darkreader-inline-bg) !important;
-}
-[data-darkreader-inline-border-short] {
-  border: var(--darkreader-inline-border-short) !important;
-}
-[data-darkreader-inline-border-bottom-short] {
-  border-bottom: var(--darkreader-inline-border-bottom-short) !important;
-}
-[data-darkreader-inline-border-left-short] {
-  border-left: var(--darkreader-inline-border-left-short) !important;
-}
-[data-darkreader-inline-border-right-short] {
-  border-right: var(--darkreader-inline-border-right-short) !important;
-}
-[data-darkreader-inline-border-top-short] {
-  border-top: var(--darkreader-inline-border-top-short) !important;
-}
-[data-darkreader-inline-invert] {
-    filter: invert(100%) hue-rotate(180deg);
 }</style><style class="darkreader darkreader--variables" media="screen">:root {
    --darkreader-neutral-background: var(--darkreader-background-ffffff, #181a1b);
    --darkreader-neutral-text: var(--darkreader-text-000000, #e8e6e3);
@@ -4071,28 +4013,36 @@ window.__showInstall=function(){
 
   function ensurePauseControl(){
     var goodOpts = document.getElementById('good-habit-opts');
-    if(!goodOpts || document.getElementById('hab-pause-limit')) return;
-    var wrap = document.createElement('div');
-    wrap.innerHTML =
-      '<div style="font-size:10px;color:#555;margin-bottom:5px;">Pause allowance per week:</div>' +
-      '<div id="vf-pause-presets" style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">' +
-        '<span class="tab-pill" data-pause="0">0 pause</span>' +
-        '<span class="tab-pill" data-pause="1">1 pause</span>' +
-        '<span class="tab-pill" data-pause="2">2 pauses</span>' +
-        '<span class="tab-pill" data-pause="3">3 max</span>' +
-      '</div>' +
-      '<input class="inp" id="hab-pause-limit" type="number" min="0" max="3" placeholder="Pause limit per week, max 3" value="3">' +
-      '<div class="vf-pause-note">Pause keeps your streak alive, but costs 45 rank points. It is only available for good habits.</div>';
-    goodOpts.appendChild(wrap);
+    if(!goodOpts) return;
+    if(!document.getElementById('hab-pause-limit')){
+      var wrap = document.createElement('div');
+      wrap.innerHTML =
+        '<div style="font-size:10px;color:#555;margin-bottom:5px;">Pause allowance per week:</div>' +
+        '<div id="vf-pause-presets" style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">' +
+          '<span class="tab-pill" data-pause="0">0 pause</span>' +
+          '<span class="tab-pill" data-pause="1">1 pause</span>' +
+          '<span class="tab-pill" data-pause="2">2 pauses</span>' +
+          '<span class="tab-pill" data-pause="3">3 max</span>' +
+        '</div>' +
+        '<input class="inp" id="hab-pause-limit" type="number" min="0" max="3" placeholder="Pause limit per week, max 3" value="3">' +
+        '<div class="vf-pause-note">Pause keeps your streak alive, but costs 45 rank points. It is only available for good habits.</div>';
+      goodOpts.appendChild(wrap);
+    }
     document.querySelectorAll('#vf-pause-presets .tab-pill').forEach(function(btn){
+      if(btn.dataset.vfWired) return;
+      btn.dataset.vfWired = '1';
       btn.onclick = function(){
         document.getElementById('hab-pause-limit').value = btn.dataset.pause;
       };
     });
-    document.getElementById('hab-pause-limit').oninput = function(){
-      var n = Math.max(0, Math.min(3, parseInt(this.value || '0', 10)));
-      this.value = n;
-    };
+    var limitInput = document.getElementById('hab-pause-limit');
+    if(limitInput && !limitInput.dataset.vfWired){
+      limitInput.dataset.vfWired = '1';
+      limitInput.oninput = function(){
+        var n = Math.max(0, Math.min(3, parseInt(this.value || '0', 10)));
+        this.value = n;
+      };
+    }
   }
 
   function paintDays(){
@@ -4594,22 +4544,25 @@ window.__showInstall=function(){
 
   function upgradeMicroCard(){
     var card = qs('micro-card');
-    if(!card || card.dataset.vfUiReady) return;
-    card.dataset.vfUiReady = '1';
-    card.classList.add('vf-collapsed');
-    var header = card.querySelector('div[style*="justify-content:space-between"]');
-    if(header){
-      var oldBtn = header.querySelector('button');
-      if(oldBtn) oldBtn.textContent = 'Goals';
-      var toggle = document.createElement('button');
+    if(!card) return;
+    if(!card.dataset.vfUiReady) card.classList.add('vf-collapsed');
+    var header = card.querySelector('.vf-micro-v12-header') || card.querySelector('div[style*="justify-content:space-between"]') || card.querySelector('div[style*="justify-content: space-between"]');
+    if(!header) return;
+    var toggle = header.querySelector('.vf-micro-toggle');
+    if(!toggle){
+      toggle = document.createElement('button');
       toggle.className = 'vf-micro-toggle';
-      toggle.textContent = 'Show';
+      header.appendChild(toggle);
+    }
+    toggle.textContent = card.classList.contains('vf-collapsed') ? 'Show' : 'Hide';
+    if(!toggle.dataset.vfWired){
+      toggle.dataset.vfWired = '1';
       toggle.onclick = function(){
         card.classList.toggle('vf-collapsed');
         toggle.textContent = card.classList.contains('vf-collapsed') ? 'Show' : 'Hide';
       };
-      header.appendChild(toggle);
     }
+    card.dataset.vfUiReady = '1';
   }
 
   function upgradeCalorieStatus(){
@@ -5041,20 +4994,24 @@ window.__showInstall=function(){
 
   function ensurePauseControl(){
     var goodOpts = document.getElementById('good-habit-opts');
-    if(!goodOpts || document.getElementById('hab-pause-limit')) return;
-    var wrap = document.createElement('div');
-    wrap.innerHTML =
-      '<div style="font-size:10px;color:#555;margin-bottom:5px;">Pause allowance per week:</div>' +
-      '<div id="vf-pause-presets" style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">' +
-        '<span class="tab-pill" data-pause="0">0 pause</span>' +
-        '<span class="tab-pill" data-pause="1">1 pause</span>' +
-        '<span class="tab-pill" data-pause="2">2 pauses</span>' +
-        '<span class="tab-pill" data-pause="3">3 max</span>' +
-      '</div>' +
-      '<input class="inp" id="hab-pause-limit" type="number" min="0" max="3" placeholder="Pause limit per week, max 3" value="3">' +
-      '<div class="vf-pause-note">Pause keeps your streak alive, but costs 45 rank points. It is only available for good habits.</div>';
-    goodOpts.appendChild(wrap);
+    if(!goodOpts) return;
+    if(!document.getElementById('hab-pause-limit')){
+      var wrap = document.createElement('div');
+      wrap.innerHTML =
+        '<div style="font-size:10px;color:#555;margin-bottom:5px;">Pause allowance per week:</div>' +
+        '<div id="vf-pause-presets" style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">' +
+          '<span class="tab-pill" data-pause="0">0 pause</span>' +
+          '<span class="tab-pill" data-pause="1">1 pause</span>' +
+          '<span class="tab-pill" data-pause="2">2 pauses</span>' +
+          '<span class="tab-pill" data-pause="3">3 max</span>' +
+        '</div>' +
+        '<input class="inp" id="hab-pause-limit" type="number" min="0" max="3" placeholder="Pause limit per week, max 3" value="3">' +
+        '<div class="vf-pause-note">Pause keeps your streak alive, but costs 45 rank points. It is only available for good habits.</div>';
+      goodOpts.appendChild(wrap);
+    }
     document.querySelectorAll('#vf-pause-presets .tab-pill').forEach(function(btn){
+      if(btn.dataset.vfWired2) return;
+      btn.dataset.vfWired2 = '1';
       btn.onclick = function(){ document.getElementById('hab-pause-limit').value = btn.dataset.pause; };
     });
   }
@@ -5532,7 +5489,7 @@ window.__showInstall=function(){
   function alignMicroGoalButton(){
     var card = document.getElementById('micro-card');
     if(!card) return;
-    var header = card.querySelector('div[style*="justify-content:space-between"]');
+    var header = card.querySelector('.vf-micro-v12-header') || card.querySelector('div[style*="justify-content:space-between"]') || card.querySelector('div[style*="justify-content: space-between"]');
     if(!header) return;
     header.style.justifyContent = 'space-between';
     header.style.gap = '8px';
@@ -5679,7 +5636,7 @@ window.__showInstall=function(){
   function fixMicroHeader(){
     var card = document.getElementById('micro-card');
     if(!card) return;
-    var header = card.querySelector('div[style*="justify-content:space-between"]');
+    var header = card.querySelector('.vf-micro-v12-header') || card.querySelector('div[style*="justify-content:space-between"]') || card.querySelector('div[style*="justify-content: space-between"]');
     if(!header) return;
     var title = header.querySelector('.card-title');
     var buttons = Array.prototype.slice.call(header.querySelectorAll('button'));
@@ -5725,19 +5682,23 @@ window.__showInstall=function(){
 
   function ensureBadDaysInput(){
     var badOpts = document.getElementById('bad-habit-opts');
-    if(!badOpts || document.getElementById('bad-hab-days')) return;
-    var box = document.createElement('div');
-    box.className = 'vf-bad-days-box';
-    box.innerHTML =
-      '<div style="font-size:10px;color:#555;margin-bottom:5px;">How many days per week?</div>' +
-      '<div style="display:flex;gap:6px;margin-bottom:8px;">' +
-        '<span class="tab-pill" data-baddays="4">4 days</span>' +
-        '<span class="tab-pill" data-baddays="5">5 days</span>' +
-        '<span class="tab-pill" data-baddays="7">Every day</span>' +
-      '</div>' +
-      '<input class="inp" id="bad-hab-days" type="number" min="1" max="7" placeholder="Days per week, e.g. 5">';
-    badOpts.insertBefore(box, badOpts.firstChild);
-    box.querySelectorAll('[data-baddays]').forEach(function(btn){
+    if(!badOpts) return;
+    if(!document.getElementById('bad-hab-days')){
+      var box = document.createElement('div');
+      box.className = 'vf-bad-days-box';
+      box.innerHTML =
+        '<div style="font-size:10px;color:#555;margin-bottom:5px;">How many days per week?</div>' +
+        '<div style="display:flex;gap:6px;margin-bottom:8px;">' +
+          '<span class="tab-pill" data-baddays="4">4 days</span>' +
+          '<span class="tab-pill" data-baddays="5">5 days</span>' +
+          '<span class="tab-pill" data-baddays="7">Every day</span>' +
+        '</div>' +
+        '<input class="inp" id="bad-hab-days" type="number" min="1" max="7" placeholder="Days per week, e.g. 5">';
+      badOpts.insertBefore(box, badOpts.firstChild);
+    }
+    badOpts.querySelectorAll('[data-baddays]').forEach(function(btn){
+      if(btn.dataset.vfWired) return;
+      btn.dataset.vfWired = '1';
       btn.onclick = function(){ document.getElementById('bad-hab-days').value = btn.dataset.baddays; };
     });
   }
@@ -6847,7 +6808,7 @@ window.__showInstall=function(){
         '<option value="lose">Cut - fat loss</option>';
     }
 
-    if(byId('vf-diet-coach-fields-v22')) return;
+    if(byId('vf-diet-coach-fields-v22')){ wireFocusChips(); return; }
     if(!goal || !goal.parentNode) return;
 
     var box = document.createElement('div');
@@ -6879,6 +6840,17 @@ window.__showInstall=function(){
       btn.textContent = m;
       btn.style.cssText = 'background:'+(i<3?'rgba(0,229,160,.16)':'rgba(255,255,255,.04)')+';border:1px solid '+(i<3?'rgba(0,229,160,.45)':'rgba(255,255,255,.1)')+';color:'+(i<3?'#00e5a0':'var(--text2)')+';border-radius:999px;padding:7px 11px;font-size:12px;font-weight:700;font-family:inherit;';
       btn.dataset.active = i < 3 ? '1' : '0';
+      chips.appendChild(btn);
+    });
+    wireFocusChips();
+  }
+
+  function wireFocusChips(){
+    var chips = byId('vf-focus-chips-v22');
+    if(!chips) return;
+    Array.prototype.slice.call(chips.querySelectorAll('button')).forEach(function(btn){
+      if(btn.dataset.vfWired) return;
+      btn.dataset.vfWired = '1';
       btn.onclick = function(){
         var active = btn.dataset.active === '1';
         btn.dataset.active = active ? '0' : '1';
@@ -6886,7 +6858,6 @@ window.__showInstall=function(){
         btn.style.borderColor = active ? 'rgba(255,255,255,.1)' : 'rgba(0,229,160,.45)';
         btn.style.color = active ? 'var(--text2)' : '#00e5a0';
       };
-      chips.appendChild(btn);
     });
   }
 
@@ -7183,7 +7154,20 @@ window.__showInstall=function(){
         '<option value="leancut">Lean Cut - definition</option>' +
         '<option value="lose">Cut - fat loss</option>';
     }
-    if(byId('vf-diet-coach-fields-v22')) return;
+    if(byId('vf-diet-coach-fields-v22')){
+      Array.prototype.slice.call(document.querySelectorAll('#vf-focus-chips-v22 button')).forEach(function(btn){
+        if(btn.dataset.vfWired2) return;
+        btn.dataset.vfWired2 = '1';
+        btn.onclick = function(){
+          var active = btn.dataset.active === '1';
+          btn.dataset.active = active ? '0' : '1';
+          btn.style.background = active ? 'rgba(255,255,255,.04)' : 'rgba(0,229,160,.16)';
+          btn.style.borderColor = active ? 'rgba(255,255,255,.1)' : 'rgba(0,229,160,.45)';
+          btn.style.color = active ? 'var(--text2)' : '#00e5a0';
+        };
+      });
+      return;
+    }
     if(!goal || !goal.parentNode) return;
     var box = document.createElement('div');
     box.id = 'vf-diet-coach-fields-v22';
@@ -10161,20 +10145,23 @@ window.__showInstall=function(){
 
   function addSaveDraftButton(){
     var list = byId('plan-meals-list');
-    if(!list || byId('vf-save-draft-plan-v39')) return;
-    var btn = document.createElement('button');
-    btn.id = 'vf-save-draft-plan-v39';
-    btn.type = 'button';
-    btn.textContent = 'Save This Plan';
-    btn.style.cssText = 'width:100%;background:linear-gradient(135deg,#00e5a0,#00b4d8);color:#000;border:none;border-radius:12px;padding:12px;font-size:14px;font-weight:900;font-family:inherit;margin:10px 0;';
-    btn.onclick = saveCurrentDraftAsPlan;
-    list.parentNode.insertBefore(btn, list);
+    if(!list) return;
+    var btn = byId('vf-save-draft-plan-v39');
+    if(!btn){
+      btn = document.createElement('button');
+      btn.id = 'vf-save-draft-plan-v39';
+      btn.type = 'button';
+      btn.textContent = 'Save This Plan';
+      btn.style.cssText = 'width:100%;background:linear-gradient(135deg,#00e5a0,#00b4d8);color:#000;border:none;border-radius:12px;padding:12px;font-size:14px;font-weight:900;font-family:inherit;margin:10px 0;';
+      list.parentNode.insertBefore(btn, list);
 
-    var hint = document.createElement('div');
-    hint.id = 'vf-save-draft-hint-v39';
-    hint.style.cssText = 'font-size:10px;color:#666;line-height:1.45;margin:-4px 0 8px;';
-    hint.textContent = 'This saves a separate plan in More. Generating a new Diet Coach plan will not overwrite saved plans.';
-    btn.parentNode.insertBefore(hint, list);
+      var hint = document.createElement('div');
+      hint.id = 'vf-save-draft-hint-v39';
+      hint.style.cssText = 'font-size:10px;color:#666;line-height:1.45;margin:-4px 0 8px;';
+      hint.textContent = 'This saves a separate plan in More. Generating a new Diet Coach plan will not overwrite saved plans.';
+      btn.parentNode.insertBefore(hint, list);
+    }
+    btn.onclick = saveCurrentDraftAsPlan;
   }
 
   function saveCurrentDraftAsPlan(){
@@ -10406,20 +10393,18 @@ window.__showInstall=function(){
     var oldHint = byId('vf-save-draft-hint-v39');
     if(oldHint && editingId()) oldHint.style.display = 'none';
 
-    if(byId('vf-plan-edit-actions-v40')) return;
-    var row = document.createElement('div');
-    row.id = 'vf-plan-edit-actions-v40';
-    row.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0;';
-    row.innerHTML =
-      '<button type="button" id="vf-update-plan-v40" style="background:linear-gradient(135deg,#00e5a0,#00b4d8);color:#000;border:none;border-radius:12px;padding:12px;font-size:13px;font-weight:900;font-family:inherit;">Update Saved Plan</button>' +
-      '<button type="button" id="vf-save-new-plan-v40" style="background:#1a1000;border:1px solid #ff9f1c;color:#ff9f1c;border-radius:12px;padding:12px;font-size:13px;font-weight:900;font-family:inherit;">Save as New</button>';
-    list.parentNode.insertBefore(row, list);
+    if(!byId('vf-plan-edit-actions-v40')){
+      var row = document.createElement('div');
+      row.id = 'vf-plan-edit-actions-v40';
+      row.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0;';
+      row.innerHTML =
+        '<button type="button" id="vf-update-plan-v40" style="background:linear-gradient(135deg,#00e5a0,#00b4d8);color:#000;border:none;border-radius:12px;padding:12px;font-size:13px;font-weight:900;font-family:inherit;">Update Saved Plan</button>' +
+        '<button type="button" id="vf-save-new-plan-v40" style="background:#1a1000;border:1px solid #ff9f1c;color:#ff9f1c;border-radius:12px;padding:12px;font-size:13px;font-weight:900;font-family:inherit;">Save as New</button>';
+      list.parentNode.insertBefore(row, list);
+    }
     byId('vf-update-plan-v40').onclick = updateSavedPlan;
     byId('vf-save-new-plan-v40').onclick = saveAsNewPlan;
-
-    if(!editingId()){
-      byId('vf-update-plan-v40').style.display = 'none';
-    }
+    byId('vf-update-plan-v40').style.display = editingId() ? '' : 'none';
   }
 
   function updateSavedPlan(){
@@ -11468,66 +11453,7 @@ window.__showInstall=function(){
 /* VITALFLOW_IMAGE_BACKUP_V45_END */
 </script>
 
-<any-op-tag data-wxt-shadow-root=""><template shadowrootmode="open"><style class="darkreader darkreader--inline" media="screen">[data-darkreader-inline-bgcolor] {
-  background-color: var(--darkreader-inline-bgcolor) !important;
-}
-[data-darkreader-inline-bgimage] {
-  background-image: var(--darkreader-inline-bgimage) !important;
-}
-[data-darkreader-inline-border] {
-  border-color: var(--darkreader-inline-border) !important;
-}
-[data-darkreader-inline-border-bottom] {
-  border-bottom-color: var(--darkreader-inline-border-bottom) !important;
-}
-[data-darkreader-inline-border-left] {
-  border-left-color: var(--darkreader-inline-border-left) !important;
-}
-[data-darkreader-inline-border-right] {
-  border-right-color: var(--darkreader-inline-border-right) !important;
-}
-[data-darkreader-inline-border-top] {
-  border-top-color: var(--darkreader-inline-border-top) !important;
-}
-[data-darkreader-inline-boxshadow] {
-  box-shadow: var(--darkreader-inline-boxshadow) !important;
-}
-[data-darkreader-inline-color] {
-  color: var(--darkreader-inline-color) !important;
-}
-[data-darkreader-inline-fill] {
-  fill: var(--darkreader-inline-fill) !important;
-}
-[data-darkreader-inline-stroke] {
-  stroke: var(--darkreader-inline-stroke) !important;
-}
-[data-darkreader-inline-outline] {
-  outline-color: var(--darkreader-inline-outline) !important;
-}
-[data-darkreader-inline-stopcolor] {
-  stop-color: var(--darkreader-inline-stopcolor) !important;
-}
-[data-darkreader-inline-bg] {
-  background: var(--darkreader-inline-bg) !important;
-}
-[data-darkreader-inline-border-short] {
-  border: var(--darkreader-inline-border-short) !important;
-}
-[data-darkreader-inline-border-bottom-short] {
-  border-bottom: var(--darkreader-inline-border-bottom-short) !important;
-}
-[data-darkreader-inline-border-left-short] {
-  border-left: var(--darkreader-inline-border-left-short) !important;
-}
-[data-darkreader-inline-border-right-short] {
-  border-right: var(--darkreader-inline-border-right-short) !important;
-}
-[data-darkreader-inline-border-top-short] {
-  border-top: var(--darkreader-inline-border-top-short) !important;
-}
-[data-darkreader-inline-invert] {
-    filter: invert(100%) hue-rotate(180deg);
-}</style><style class="darkreader darkreader--override" media="screen">.vimvixen-hint {
+<any-op-tag data-wxt-shadow-root=""><template shadowrootmode="open"><style class="darkreader darkreader--override" media="screen">.vimvixen-hint {
     background-color: var(--darkreader-background-ffd76e, #684b00) !important;
     border-color: var(--darkreader-background-c59d00, #9e7e00) !important;
     color: var(--darkreader-text-302505, #d7d4cf) !important;
