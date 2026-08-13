@@ -2428,8 +2428,54 @@ function importData(e){
   e.target.value = '';
 }
 
+function arrayBufferToBase64(buffer){
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  const chunk = 0x8000;
+  for(let i=0;i<bytes.length;i+=chunk){
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i+chunk));
+  }
+  return btoa(binary);
+}
+function base64ToArrayBuffer(base64){
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i++) bytes[i] = binary.charCodeAt(i);
+  return bytes.buffer;
+}
+
+async function compressBackupText(text){
+  if(window.CompressionStream){
+    try{
+      const cs = new CompressionStream('gzip');
+      const writer = cs.writable.getWriter();
+      writer.write(new TextEncoder().encode(text));
+      writer.close();
+      const buf = await new Response(cs.readable).arrayBuffer();
+      return 'VFGZ1:' + arrayBufferToBase64(buf);
+    }catch(e){ /* fall through to raw */ }
+  }
+  return 'VFRAW1:' + text;
+}
+
+async function decompressBackupText(payload){
+  const trimmed = payload.trim();
+  if(trimmed.indexOf('VFGZ1:') === 0){
+    const buf = base64ToArrayBuffer(trimmed.slice(6));
+    const ds = new DecompressionStream('gzip');
+    const writer = ds.writable.getWriter();
+    writer.write(buf);
+    writer.close();
+    const out = await new Response(ds.readable).arrayBuffer();
+    return new TextDecoder().decode(out);
+  }
+  if(trimmed.indexOf('VFRAW1:') === 0) return trimmed.slice(7);
+  return trimmed; // backward-compatible: older copied backups were plain JSON
+}
+
 async function copyBackupToClipboard(){
-  const text = JSON.stringify(buildBackupPayload());
+  const rawText = JSON.stringify(buildBackupPayload());
+  const text = await compressBackupText(rawText);
   const btn = document.getElementById('vf-backup-copy-btn');
   try{
     if(navigator.clipboard && navigator.clipboard.writeText){
@@ -2446,8 +2492,9 @@ async function copyBackupToClipboard(){
     }
     if(btn){
       const original = btn.textContent;
-      btn.textContent = '✅ Copied! Paste it wherever you like';
-      setTimeout(()=>{ btn.textContent = original; }, 2500);
+      const pct = rawText.length ? Math.round(100 - (text.length / rawText.length) * 100) : 0;
+      btn.textContent = '✅ Copied (' + (pct > 0 ? pct + '% smaller' : 'ready') + ')! Paste it wherever you like';
+      setTimeout(()=>{ btn.textContent = original; }, 3000);
     }
   }catch(e){
     alert('Could not copy automatically. Try Export Data or Import File instead.');
@@ -2460,16 +2507,18 @@ function toggleBackupPasteBox(){
   box.style.display = box.style.display === 'none' ? 'block' : 'none';
 }
 
-function importBackupFromPasteBox(){
+async function importBackupFromPasteBox(){
   const input = document.getElementById('vf-backup-paste-input');
   if(!input || !input.value.trim()){ alert('Paste your backup text into the box first.'); return; }
   try{
-    const data = JSON.parse(input.value.trim());
+    const rawText = await decompressBackupText(input.value);
+    const data = JSON.parse(rawText);
     applyBackupData(data);
   }catch(err){
     alert('That does not look like valid backup text. Make sure you copied the whole thing.');
   }
 }
+
 
 // ===== MACRO GOALS =====
 const DEFAULT_MACRO_GOALS = {protein:150,carbs:300,fats:80};
